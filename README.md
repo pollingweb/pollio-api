@@ -1,5 +1,11 @@
 # Poll.io API support.
 
+|   Method    | End point        | Header      | Body           | Response       |
+| ----------- | -----------      | ----------- | -----------    | -----------    |
+| GET         | /api/voter       | null        | [click Here]() | [click Here]() |
+| GET         | /api/voter/:id   | null        | [click Here]() | [click Here]() |
+
+
 ## Voter
 
 ## Candidate
@@ -9,6 +15,7 @@
 ## Poll
 
 ## Image upload
+
 
 ```HTML
     <form action="http://localhost:3000/api/upload" method="post" enctype="multipart/form-data">
