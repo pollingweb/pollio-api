@@ -1,4 +1,4 @@
-# List of all end points are as follows.
+# Poll.io API support.
 
 ## Voter
 
