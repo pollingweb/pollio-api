@@ -3,12 +3,12 @@
 
 ## Voter
 
-| Method | End point      | Header | Body                                       | Response                                                    |
-| ------ | -------------- | ------ | ------------------------------------------ | ----------------------------------------------------------- |
-| GET    | /api/voter     | null   | null                                       | [click Here](###response-of-getting-the-list-of-all-voters) |
-| GET    | /api/voter/:id | null   | null                                       | [click Here](###response-of-getting-voters-by-id)           |
-| POST   | /api/voter     | null   | [click Here](###body-for-creating-a-voter) | [click Here](###response-of-voters-creation)                |
-| PUT    | /api/voter/:id | null   | [click Here](###body-for-voter-updation)   | [click Here](###response-of-voter-updation)                 |
+| Method | End point      | Header | Body                                     | Response                                                  |
+| ------ | -------------- | ------ | ---------------------------------------- | --------------------------------------------------------- |
+| GET    | /api/voter     | null   | null                                     | [click Here](#response-of-getting-the-list-of-all-voters) |
+| GET    | /api/voter/:id | null   | null                                     | [click Here](#response-of-getting-voters-by-id)           |
+| POST   | /api/voter     | null   | [click Here](#body-for-creating-a-voter) | [click Here](#response-of-voters-creation)                |
+| PUT    | /api/voter/:id | null   | [click Here](#body-for-voter-updation)   | [click Here](#response-of-voter-updation)                 |
 
 ### response of getting the list of all voters
 
@@ -99,12 +99,12 @@
 
 ## Candidate
 
-| Method | End point          | Header | Body                                          | Response                                                        |
-| ------ | ------------------ | ------ | --------------------------------------------- | --------------------------------------------------------------- |
-| GET    | /api/candidate     | null   | null                                          | [click Here](###response-of-getting-the-list-of-all-candidates) |
-| GET    | /api/candidate/:id | null   | null                                          | [click Here](###response-of-getting-candidate-by-id)            |
-| POST   | /api/candidate     | null   | [click Here](###body-for-creating-candidates) | [click Here](###response-of-candidate-creation)                 |
-| PUT    | /api/candidate/:id | null   | [click Here](###body-for-candidate-updation)  | [click Here](###response-of-candidate-updation)                 |
+| Method | End point          | Header | Body                                        | Response                                                      |
+| ------ | ------------------ | ------ | ------------------------------------------- | ------------------------------------------------------------- |
+| GET    | /api/candidate     | null   | null                                        | [click Here](#response-of-getting-the-list-of-all-candidates) |
+| GET    | /api/candidate/:id | null   | null                                        | [click Here](#response-of-getting-candidate-by-id)            |
+| POST   | /api/candidate     | null   | [click Here](#body-for-creating-candidates) | [click Here](#response-of-candidate-creation)                 |
+| PUT    | /api/candidate/:id | null   | [click Here](#body-for-candidate-updation)  | [click Here](#response-of-candidate-updation)                 |
 
 ### response of getting the list of all candidates
 
@@ -192,12 +192,12 @@
 
 ## Organiser
 
-| Method | End point          | Header | Body                                          | Response                                                        |
-| ------ | ------------------ | ------ | --------------------------------------------- | --------------------------------------------------------------- |
-| GET    | /api/organizer     | null   | null                                          | [click Here](###response-of-getting-the-list-of-all-organisers) |
-| GET    | /api/organizer/:id | null   | null                                          | [click Here](###response-of-getting-organiser-by-id)            |
-| POST   | /api/organizer     | null   | [click Here](###body-for-creating-organiser)  | [click Here](###response-of-organisers-creation)                |
-| PUT    | /api/organizer/:id | null   | [click Here](###body-for-organisers-updation) | [click Here](###response-of-organisers-updation)                |
+| Method | End point          | Header | Body                                        | Response                                                      |
+| ------ | ------------------ | ------ | ------------------------------------------- | ------------------------------------------------------------- |
+| GET    | /api/organizer     | null   | null                                        | [click Here](#response-of-getting-the-list-of-all-organisers) |
+| GET    | /api/organizer/:id | null   | null                                        | [click Here](#response-of-getting-organiser-by-id)            |
+| POST   | /api/organizer     | null   | [click Here](#body-for-creating-organiser)  | [click Here](#response-of-organisers-creation)                |
+| PUT    | /api/organizer/:id | null   | [click Here](#body-for-organisers-updation) | [click Here](#response-of-organisers-updation)                |
 
 ### response of getting the list of all organisers
 
@@ -283,12 +283,12 @@
 
 ## Poll
 
-| Method | End point     | Header | Body                                    | Response                                                   |
-| ------ | ------------- | ------ | --------------------------------------- | ---------------------------------------------------------- |
-| GET    | /api/poll     | null   | null                                    | [click Here](###response-of-getting-the-list-of-all-polls) |
-| GET    | /api/poll/:id | null   | null                                    | [click Here](###response-of-getting-poll-by-id)            |
-| POST   | /api/poll     | null   | [click Here](###body-for-creating-poll) | [click Here](###response-of-poll-creation)                 |
-| PUT    | /api/poll/:id | null   | [click Here](#body-for-poll-updation)   | [click Here](#response-of-poll-updation)                   |
+| Method | End point     | Header | Body                                  | Response                                                 |
+| ------ | ------------- | ------ | ------------------------------------- | -------------------------------------------------------- |
+| GET    | /api/poll     | null   | null                                  | [click Here](#response-of-getting-the-list-of-all-polls) |
+| GET    | /api/poll/:id | null   | null                                  | [click Here](#response-of-getting-poll-by-id)            |
+| POST   | /api/poll     | null   | [click Here](#body-for-creating-poll) | [click Here](#response-of-poll-creation)                 |
+| PUT    | /api/poll/:id | null   | [click Here](#body-for-poll-updation) | [click Here](#response-of-poll-updation)                 |
 
 
 ### response of getting the list of all polls
@@ -380,9 +380,9 @@
 ## Image upload
 
 
-| Method | End point   | Header | Body                                   | Response                                  |
-| ------ | ----------- | ------ | -------------------------------------- | ----------------------------------------- |
-| POST   | /api/upload | null   | [click Here](###body-for-image-upload) | [click Here](###response-of-image-upload) |
+| Method | End point   | Header | Body                                 | Response                                |
+| ------ | ----------- | ------ | ------------------------------------ | --------------------------------------- |
+| POST   | /api/upload | null   | [click Here](#body-for-image-upload) | [click Here](#response-of-image-upload) |
 
 ### body for image upload
 
