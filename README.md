@@ -288,7 +288,7 @@
 | GET    | /api/poll     | null   | null                                   | [click Here]()                            |
 | GET    | /api/poll/:id | null   | null                                   | [click Here]()                            |
 | POST   | /api/poll     | null   | [click Here]()                         | [click Here]()                            |
-| PUT    | /api/poll/:id | null   | [click Here](#-body-for-poll-updation) | [click Here](#-response-of-poll-updation) |
+| PUT    | /api/poll/:id | null   | [click Here](#body-for-poll-updation) | [click Here](#response-of-poll-updation) |
 
 
 ### response of getting the list of all polls
