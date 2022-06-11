@@ -180,7 +180,7 @@
 
 | Method | End point   | Header | Body                                    | Response                                   |
 | ------ | ----------- | ------ | --------------------------------------- | ------------------------------------------ |
-| POST   | /api/upload | null   | [click Here](### body for image upload) | [click Here](### response of image upload) |
+| POST   | /api/upload | null   | [click Here](###-body-for-image-upload) | [click Here](###-response-of-image-upload) |
 
 ### body for image upload
 
