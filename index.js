@@ -27,9 +27,14 @@ app.use("/api/candidate", routerCandidate);
 app.use("/api/upload", routerUpload);
 
 
-const port = 3000
+const port = 3001
 
 app.listen(port, () => {
     console.log(`API running on port ${port}`);
 })
-
+// import Voter from './models/voter.js';
+// import Candidate from './models/candidates.js';
+// import Poll from './models/poll.js';
+// import Organizer from './models/organizer.js';
+// import sequelize from './models/base.js';
+// sequelize.sync();

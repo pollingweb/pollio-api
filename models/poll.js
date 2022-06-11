@@ -26,6 +26,10 @@ const Poll = sequelize.define("Poll", {
   pollType: {
     type: DataTypes.ENUM(['Public', 'Private']),
     defaultValue: 'Public',
+  },
+  orgId:{
+    type: DataTypes.STRING,
+    allowNull: false,
   }
 });
 
