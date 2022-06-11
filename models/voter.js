@@ -16,10 +16,6 @@ const Voter = sequelize.define("Voter", {
     allowNull: false,
     defaultValue: false,
   },
-  pollId: {
-    type: DataTypes.STRING,
-    allowNull: true,
-  },
   photoUrl: {
     type: DataTypes.STRING,
     allowNull: false,

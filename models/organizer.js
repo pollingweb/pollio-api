@@ -1,7 +1,7 @@
 import sequelize from "./base.js";
 import { DataTypes } from "sequelize";
 
-const Organiser = sequelize.define("Organiser", {
+const Organizer = sequelize.define("Organiser", {
   id: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -25,4 +25,5 @@ const Organiser = sequelize.define("Organiser", {
   },
 });
 
-export default Organiser;
+
+export default Organizer;

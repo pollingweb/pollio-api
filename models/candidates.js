@@ -11,10 +11,6 @@ const Candidate = sequelize.define("Candidate", {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  pollId: {
-    type: DataTypes.STRING,
-    allowNull: true,
-  },
   imageUrl: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -29,5 +25,7 @@ const Candidate = sequelize.define("Candidate", {
   }
   
 });
+
+
 
 export default Candidate;

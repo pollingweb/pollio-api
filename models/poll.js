@@ -12,7 +12,7 @@ const Poll = sequelize.define("Poll", {
     allowNull: false,
   },
   status: {
-    type: DataTypes.ENUM(['Created','Running', 'Canceled', 'Ended']),
+    type: DataTypes.ENUM(['Created', 'Running', 'Canceled', 'Ended']),
     defaultValue: 'Created',
   },
   startDate: {
@@ -26,12 +26,9 @@ const Poll = sequelize.define("Poll", {
   pollType: {
     type: DataTypes.ENUM(['Public', 'Private']),
     defaultValue: 'Public',
-  },
-  orgId:{
-    type: DataTypes.STRING,
-    allowNull: false,
   }
 });
+
 
 
 export default Poll;
