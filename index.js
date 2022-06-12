@@ -8,10 +8,6 @@ import routerUpload from "./routes/image-upload-router.js";
 import routerOrganiser from "./routes/organiser-router.js";
 import routerCandidate from "./routes/candidate-router.js";
 
-/** For table initialization uncomment 👇️ */
-// import initTables from './models/init.js';
-// initTables();
-
 const app = express();
 
 

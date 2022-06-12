@@ -16,14 +16,14 @@
 
 [
   {
-    "id": "first",
-    "name": "Rohit",
+    "id": "voter1",
+    "name": "Mohit",
     "verified": false,
-    "pollId": "mypoll",
-    "photoUrl": "/url",
-    "email": "my@gmail.com",
-    "createdAt": "2022-06-10T03:58:05.000Z",
-    "updatedAt": "2022-06-10T03:58:05.000Z"
+    "photoUrl": "www.url.com",
+    "email": "singh.rohitsingh2k@gmail.com",
+    "createdAt": "2022-06-12T06:07:43.000Z",
+    "updatedAt": "2022-06-12T06:08:27.000Z",
+    "PollId": "first"
   }
 ]
 
@@ -33,14 +33,14 @@
 ```JSON
 
 {
-    "id": "first",
-    "name": "Rohit",
-    "verified": false,
-    "pollId": "mypoll",
-    "photoUrl": "/url",
-    "email": "my@gmail.com",
-    "createdAt": "2022-06-10T03:58:05.000Z",
-    "updatedAt": "2022-06-10T03:58:05.000Z"
+  "id": "voter1",
+  "name": "Mohit",
+  "verified": false,
+  "photoUrl": "www.url.com",
+  "email": "singh.rohitsingh2k@gmail.com",
+  "createdAt": "2022-06-12T06:07:43.000Z",
+  "updatedAt": "2022-06-12T06:08:27.000Z",
+  "PollId": "first"
 }
 
 ```
@@ -54,7 +54,8 @@
     "verfied" : false,         // Optional
     "pollId": "mypoll",        // Optional
     "photoUrl": "www.url.com", // must be a valid url;
-    "email": "my@gmail.com"
+    "email": "my@gmail.com",
+    "PollId": "first"          // Optional
 }
 
 ```
@@ -65,13 +66,12 @@
 
 {
   "verified": false,
-  "id": "six",
+  "id": "sec",
   "name": "Rohit",
-  "pollId": "mypoll",
   "photoUrl": "www.url.com",
   "email": "my@gmail.com",
-  "updatedAt": "2022-06-11T09:18:38.752Z",
-  "createdAt": "2022-06-11T09:18:38.752Z"
+  "updatedAt": "2022-06-12T06:56:40.369Z",
+  "createdAt": "2022-06-12T06:56:40.369Z"
 }
 
 ```
@@ -112,14 +112,14 @@
 
 [
   {
-    "id": "first",
-    "name": "Rohit Singh",
-    "pollId": null,
-    "imageUrl": "hi",
+    "id": "my candidate",
+    "name": "Himanshu",
+    "imageUrl": "www.url.com",
     "voteCount": 0,
     "description": null,
-    "createdAt": "2022-06-10T05:49:38.000Z",
-    "updatedAt": "2022-06-10T05:51:02.000Z"
+    "createdAt": "2022-06-12T06:26:07.000Z",
+    "updatedAt": "2022-06-12T06:26:07.000Z",
+    "PollId": "first"
   }
 ]
 
@@ -129,14 +129,25 @@
 ```JSON
 
 {
+  "id": "my candidate",
+  "name": "Himanshu",
+  "imageUrl": "www.url.com",
+  "voteCount": 0,
+  "description": null,
+  "createdAt": "2022-06-12T06:26:07.000Z",
+  "updatedAt": "2022-06-12T06:26:07.000Z",
+  "PollId": "first",
+  "Poll": {
     "id": "first",
-    "name": "Rohit Singh",
-    "pollId": null,
-    "imageUrl": "hi",
-    "voteCount": 0,
-    "description": null,
-    "createdAt": "2022-06-10T05:49:38.000Z",
-    "updatedAt": "2022-06-10T05:51:02.000Z"
+    "name": "Anuj",
+    "status": "Created",
+    "startDate": "2022-06-25 10:12:00",
+    "endDate": "2022-06-26 10:12:00",
+    "pollType": "Public",
+    "createdAt": "2022-06-12T05:53:47.000Z",
+    "updatedAt": "2022-06-12T06:04:53.000Z",
+    "OrganiserId": "hello"
+  }
 }
 
 ```
@@ -147,7 +158,7 @@
 {
     "id": "first",
     "name": "Rohit Singh",
-    "pollId": null,             // Optional
+    "PollId": null,             // Optional
     "imageUrl": "www.hi.com",   
     "voteCount": 0,             // Optional
     "description": null         // optional
@@ -161,11 +172,12 @@
 
 {
   "voteCount": 0,
-  "id": "ten",
-  "name": "Rohit Singh",
-  "imageUrl": "www.hi.com",
-  "updatedAt": "2022-06-11T09:23:49.893Z",
-  "createdAt": "2022-06-11T09:23:49.893Z"
+  "id": "second",
+  "name": "Himanshu",
+  "imageUrl": "www.url.com",
+  "PollId": "first",
+  "updatedAt": "2022-06-12T06:49:48.655Z",
+  "createdAt": "2022-06-12T06:49:48.655Z"
 }
 
 ```
@@ -205,29 +217,41 @@
 
 [
   {
-    "id": "first",
-    "name": "Rohit Singh",
+    "id": "hello",
+    "name": "Anuj",
     "address": "something",
     "phone": 7003257593,
-    "email": "singh.rohit@gamil.com",
-    "createdAt": "2022-06-10T05:44:45.000Z",
-    "updatedAt": "2022-06-10T05:45:32.000Z"
+    "email": "hello@gmail.com",
+    "createdAt": "2022-06-12T05:56:31.000Z",
+    "updatedAt": "2022-06-12T05:56:31.000Z"
   }
 ]
-
 ```
 ### response of getting organiser by id
 
 ```JSON
 
 {
-    "id": "first",
-    "name": "Rohit Singh",
-    "address": "something",
-    "phone": 7003257593,
-    "email": "singh.rohit@gamil.com",
-    "createdAt": "2022-06-10T05:44:45.000Z",
-    "updatedAt": "2022-06-10T05:45:32.000Z"
+  "id": "hello",
+  "name": "Anuj",
+  "address": "something",
+  "phone": 7003257593,
+  "email": "hello@gmail.com",
+  "createdAt": "2022-06-12T05:56:31.000Z",
+  "updatedAt": "2022-06-12T05:56:31.000Z",
+  "Polls": [
+    {
+      "id": "first",
+      "name": "Anuj",
+      "status": "Created",
+      "startDate": "2022-06-25 10:12:00",
+      "endDate": "2022-06-26 10:12:00",
+      "pollType": "Public",
+      "createdAt": "2022-06-12T05:53:47.000Z",
+      "updatedAt": "2022-06-12T06:04:53.000Z",
+      "OrganiserId": "hello"
+    }
+  ]
 }
 
 ```
@@ -250,13 +274,13 @@
 ```JSON
 
 {
-  "id": "ten",
+  "id": "org2",
   "name": "Rohit Singh",
   "address": "something",
   "phone": 7003257593,
   "email": "singh.rohit@gamil.com",
-  "updatedAt": "2022-06-11T09:26:55.989Z",
-  "createdAt": "2022-06-11T09:26:55.989Z"
+  "updatedAt": "2022-06-12T06:59:40.751Z",
+  "createdAt": "2022-06-12T06:59:40.751Z"
 }
 
 ```
@@ -297,14 +321,15 @@
 
 [
   {
-    "id": "somethig",
-    "name": "First-Poll",
+    "id": "first",
+    "name": "Anuj",
     "status": "Created",
-    "startDate": "2022-01-17T04:33:12Z",
-    "endDate": "2022-01-17T04:33:12Z",
+    "startDate": "2022-06-25 10:12:00",
+    "endDate": "2022-06-26 10:12:00",
     "pollType": "Public",
-    "createdAt": "2022-06-10T05:35:49.000Z",
-    "updatedAt": "2022-06-10T05:35:49.000Z"
+    "createdAt": "2022-06-12T05:53:47.000Z",
+    "updatedAt": "2022-06-12T06:04:53.000Z",
+    "OrganiserId": "hello"
   }
 ]
 
@@ -314,14 +339,58 @@
 ```JSON
 
 {
-  "id": "somethig",
-  "name": "First-Poll",
+  "id": "first",
+  "name": "Anuj",
   "status": "Created",
-  "startDate": "2022-01-17T04:33:12Z",
-  "endDate": "2022-01-17T04:33:12Z",
+  "startDate": "2022-06-25 10:12:00",
+  "endDate": "2022-06-26 10:12:00",
   "pollType": "Public",
-  "createdAt": "2022-06-10T05:35:49.000Z",
-  "updatedAt": "2022-06-10T05:35:49.000Z"
+  "createdAt": "2022-06-12T05:53:47.000Z",
+  "updatedAt": "2022-06-12T06:04:53.000Z",
+  "OrganiserId": "hello",
+  "Organiser": {
+    "id": "hello",
+    "name": "Anuj",
+    "address": "something",
+    "phone": 7003257593,
+    "email": "hello@gmail.com",
+    "createdAt": "2022-06-12T05:56:31.000Z",
+    "updatedAt": "2022-06-12T05:56:31.000Z"
+  },
+  "Candidates": [
+    {
+      "id": "my candidate",
+      "name": "Himanshu",
+      "imageUrl": "www.url.com",
+      "voteCount": 0,
+      "description": null,
+      "createdAt": "2022-06-12T06:26:07.000Z",
+      "updatedAt": "2022-06-12T06:26:07.000Z",
+      "PollId": "first"
+    },
+    {
+      "id": "second",
+      "name": "Himanshu",
+      "imageUrl": "www.url.com",
+      "voteCount": 0,
+      "description": null,
+      "createdAt": "2022-06-12T06:49:48.000Z",
+      "updatedAt": "2022-06-12T06:49:48.000Z",
+      "PollId": "first"
+    }
+  ],
+  "Voters": [
+    {
+      "id": "voter1",
+      "name": "Mohit",
+      "verified": false,
+      "photoUrl": "www.url.com",
+      "email": "singh.rohitsingh2k@gmail.com",
+      "createdAt": "2022-06-12T06:07:43.000Z",
+      "updatedAt": "2022-06-12T06:08:27.000Z",
+      "PollId": "first"
+    }
+  ]
 }
 
 ```
@@ -335,7 +404,8 @@
   "status": "Created",                  // Optional
   "startDate": "2022-01-17T04:33:12Z",
   "endDate": "2022-01-17T04:33:12Z",
-  "pollType": "Public"                  // Optional
+  "pollType": "Public",                 // Optional
+  "OrganiserId": "hello",               // Optional
 }
 
 ```
@@ -345,14 +415,14 @@
 ```JSON
 
 {
+  "status": "Created",
+  "pollType": "Public",
   "id": "somethig12",
   "name": "First-Poll",
-  "status": "Created",
   "startDate": "2022-01-17T04:33:12Z",
   "endDate": "2022-01-17T04:33:12Z",
-  "pollType": "Public",
-  "updatedAt": "2022-06-11T09:29:21.423Z",
-  "createdAt": "2022-06-11T09:29:21.423Z"
+  "updatedAt": "2022-06-12T06:53:56.932Z",
+  "createdAt": "2022-06-12T06:53:56.932Z"
 }
 
 ```

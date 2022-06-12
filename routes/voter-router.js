@@ -1,5 +1,5 @@
+import db from "../models/index.js";
 import { Router } from "express";
-import Voter from "../models/voter.js";
 import { body, validationResult } from 'express-validator';
 
 const router = new Router();
@@ -19,10 +19,11 @@ router.post("/",
       return res.status(400).json({ errors: errors.array() });
     }
 
-    Voter.create(req.body)
+    db.voter.create(req.body)
       .then((voter) => res.json(voter))
       .catch(err => res.status(500).json({
-        messages: err.errors
+        success : false,
+        messages: err.errors || "voter not created, insufficient data."
       }));
   });
 
@@ -32,7 +33,7 @@ router.post("/",
  */
 router.get("/",
   (req, res) => {
-    Voter.findAll()
+    db.voter.findAll()
       .then(voters => res.json(voters))
       .catch(err => res.status(500).json({
         messages: err.errors
@@ -45,7 +46,7 @@ router.get("/",
  */
 router.get("/:id",
   (req, res) => {
-    Voter.findOne(
+    db.voter.findOne(
       {
         where: {
           id: req.params.id
@@ -63,7 +64,7 @@ router.get("/:id",
  */
 router.put("/:id",
   (req, res) => {
-    Voter.update({ ...req.body }, {
+    db.voter.update({ ...req.body }, {
       where: { id: req.params.id }
     })
       .then(() => res.json({

@@ -1,5 +1,5 @@
+import db from "../models/index.js";
 import { Router } from "express";
-import Organizer from "../models/organizer.js";
 import { body, validationResult } from 'express-validator';
 
 const router = new Router();
@@ -22,10 +22,11 @@ router.post("/",
             return res.status(400).json({ errors: errors.array() });
         }
 
-        Organizer.create(req.body)
+        db.organizer.create(req.body)
             .then((organizer) => res.json(organizer))
             .catch(err => res.status(500).json({
-                messages: err.errors
+                success : false,
+                messages: err.errors || "organiser not created, insufficient data."
             }));
     });
 
@@ -34,7 +35,7 @@ router.post("/",
  * Get the list of all organizers.
  */
 router.get("/", (req, res) => {
-    Organizer.findAll()
+    db.organizer.findAll()
         .then(organizers => res.json(organizers))
         .catch(err => res.status(500).json({
             messages: err.errors
@@ -46,7 +47,8 @@ router.get("/", (req, res) => {
  * Find organizer by id.
  */
 router.get("/:id", (req, res) => {
-    Organizer.findOne({
+    db.organizer.findOne({
+        include : [db.poll],
         where: {
             id: req.params.id
         }
@@ -62,7 +64,7 @@ router.get("/:id", (req, res) => {
  * Update any field of organizer.
  */
 router.put("/:id", (req, res) => {
-    Organizer.update({ ...req.body }, {
+    db.organizer.update({ ...req.body }, {
         where: { id: req.params.id }
     })
         .then(() => res.json({

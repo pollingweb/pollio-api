@@ -1,6 +1,8 @@
+import db from "../models/index.js";
 import { Router } from "express";
-import Poll from "../models/poll.js";
 import { body, validationResult } from 'express-validator';
+import { DB_NAME } from "../config.js";
+
 
 const router = new Router();
 
@@ -20,10 +22,11 @@ router.post("/",
             return res.status(400).json({ errors: errors.array() });
         }
 
-        Poll.create(req.body)
+        db.poll.create(req.body)
             .then((poll) => res.json(poll))
             .catch(err => res.status(500).json({
-                messages: err.errors
+                success: false,
+                messages: err.errors || "Poll not created, insufficient data!"
             }));
     });
 
@@ -32,10 +35,11 @@ router.post("/",
  * Get the list of all polls.
  */
 router.get("/", (req, res) => {
-    Poll.findAll()
+    db.poll.findAll()
         .then(polls => res.json(polls))
         .catch(err => res.status(500).json({
-            messages: err.errors
+            success: false,
+            messages: err
         }));
 });
 
@@ -44,14 +48,16 @@ router.get("/", (req, res) => {
  * Find poll by id.
  */
 router.get("/:id", (req, res) => {
-    Poll.findOne({
+    db.poll.findOne({
+        include: [db.organizer, db.candidate, db.voter],
         where: {
             id: req.params.id
         }
     })
         .then(poll => res.json(poll))
         .catch(err => res.status(500).json({
-            messages: err.errors
+            success: false,
+            messages: err
         }));
 });
 
@@ -60,14 +66,15 @@ router.get("/:id", (req, res) => {
  * Update any field of poll.
  */
 router.put("/:id", (req, res) => {
-    Poll.update({ ...req.body }, {
+    db.poll.update({ ...req.body }, {
         where: { id: req.params.id }
     })
         .then(() => res.json({
             message: "poll updated successfully!",
         }))
         .catch(err => res.status(500).json({
-            messages: err.errors
+            success: false,
+            messages: err
         }));
 });
 

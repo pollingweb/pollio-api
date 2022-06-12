@@ -1,5 +1,5 @@
+import db from "../models/index.js";
 import { Router } from "express";
-import Candidate from "../models/candidates.js";
 import { body, validationResult } from 'express-validator';
 
 const router = new Router();
@@ -19,10 +19,11 @@ router.post("/",
             return res.status(400).json({ errors: errors.array() });
         }
 
-        Candidate.create(req.body)
+        db.candidate.create(req.body)
             .then((candidate) => res.json(candidate))
             .catch(err => res.status(500).json({
-                messages: err.errors
+                success : false,
+                messages: err.errors || "candidate not created, insufficient data."
             }));
     });
 
@@ -31,7 +32,7 @@ router.post("/",
  * Get the list of all candidates.
  */
 router.get("/", (req, res) => {
-    Candidate.findAll()
+    db.candidate.findAll()
         .then(candidates => res.json(candidates))
         .catch(err => res.status(500).json({
             messages: err.errors
@@ -43,7 +44,8 @@ router.get("/", (req, res) => {
  * Find candidate by id.
  */
 router.get("/:id", (req, res) => {
-    Candidate.findOne({
+    db.candidate.findOne({
+        include : [db.poll],
         where: {
             id: req.params.id
         }
@@ -59,7 +61,7 @@ router.get("/:id", (req, res) => {
  * Update any field of candidate.
  */
 router.put("/:id", (req, res) => {
-    Candidate.update({ ...req.body }, {
+    db.candidate.update({ ...req.body }, {
         where: { id: req.params.id }
     })
         .then(() => res.json({
