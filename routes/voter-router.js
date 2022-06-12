@@ -1,6 +1,8 @@
 import db from "../models/index.js";
 import { Router } from "express";
 import { body, validationResult } from 'express-validator';
+import bcrypt from 'bcrypt';
+import { createToken, verifyToken } from "../auth/jwt.js";
 
 const router = new Router();
 
@@ -19,12 +21,28 @@ router.post("/",
       return res.status(400).json({ errors: errors.array() });
     }
 
-    db.voter.create(req.body)
-      .then((voter) => res.json(voter))
-      .catch(err => res.status(500).json({
-        success : false,
-        messages: err.errors || "voter not created, insufficient data."
-      }));
+    const voter = req.body;
+
+    bcrypt.hash(voter.password, 10, (err, hash) => {
+
+      if (err) {
+        res.status(500).json({
+          success: false,
+          messages: err
+        })
+      }
+
+      db.voter.create({
+        ...voter,
+        password: hash
+      })
+        .then((voter) => res.json(voter))
+        .catch(err => res.status(500).json({
+          success: false,
+          messages: err.errors || "voter not created, insufficient data."
+        }));
+    })
+
   });
 
 
@@ -44,19 +62,18 @@ router.get("/",
 /**
  * Find voter by id.
  */
-router.get("/:id",
-  (req, res) => {
-    db.voter.findOne(
-      {
-        where: {
-          id: req.params.id
-        }
-      })
-      .then(voter => res.json(voter))
-      .catch(err => res.status(500).json({
-        messages: err.errors
-      }));
-  });
+router.get("/:id", (req, res) => {
+  db.voter.findOne(
+    {
+      where: {
+        id: req.params.id
+      }
+    })
+    .then(voter => res.json(voter))
+    .catch(err => res.status(500).json({
+      messages: err.errors
+    }));
+});
 
 
 /**
@@ -75,5 +92,32 @@ router.put("/:id",
       }));
   });
 
+
+router.post("/login", async (req, res) => {
+  const { email, password } = req.body;
+
+  const voter = await db.voter.findOne({ where: { email: email } });
+
+  if (!voter) res.status(400).json({ error: "Voter Doesn't Exist" });
+
+  const dbPassword = voter.password;
+  bcrypt.compare(password, dbPassword).then((match) => {
+    if (!match) {
+      res
+        .status(400)
+        .json({ error: "Wrong Username and Password Combination!" });
+    } else {
+      const accessToken = createToken(voter);
+
+      // cookie will expire in a month.
+      res.cookie("access-token", accessToken, {
+        maxAge: 60 * 60 * 24 * 30 * 1000,
+        httpOnly: true,
+      });
+
+      res.json("LOGGED IN");
+    }
+  });
+});
 
 export default router;

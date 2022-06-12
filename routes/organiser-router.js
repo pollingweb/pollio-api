@@ -1,6 +1,8 @@
 import db from "../models/index.js";
 import { Router } from "express";
 import { body, validationResult } from 'express-validator';
+import bcrypt from 'bcrypt';
+import { createToken, verifyToken } from "../auth/jwt.js";
 
 const router = new Router();
 
@@ -22,12 +24,28 @@ router.post("/",
             return res.status(400).json({ errors: errors.array() });
         }
 
-        db.organizer.create(req.body)
-            .then((organizer) => res.json(organizer))
-            .catch(err => res.status(500).json({
-                success : false,
-                messages: err.errors || "organiser not created, insufficient data."
-            }));
+        const organizer = req.body;
+
+        bcrypt.hash(organizer.password, 10, (err, hash) => {
+
+            if (err) {
+                res.status(500).json({
+                    success: false,
+                    messages: err
+                })
+            }
+
+            db.organizer.create({
+                ...organizer,
+                password: hash
+            })
+                .then((organizer) => res.json(organizer))
+                .catch(err => res.status(500).json({
+                    success: false,
+                    messages: err.errors || "organiser not created, insufficient data."
+                }));
+        })
+
     });
 
 
@@ -48,7 +66,7 @@ router.get("/", (req, res) => {
  */
 router.get("/:id", (req, res) => {
     db.organizer.findOne({
-        include : [db.poll],
+        include: [db.poll],
         where: {
             id: req.params.id
         }
@@ -74,6 +92,34 @@ router.put("/:id", (req, res) => {
             messages: err.errors
         }));
 });
+
+
+router.post("/login", async (req, res) => {
+    const { email, password } = req.body;
+  
+    const organiser = await db.organizer.findOne({ where: { email: email } });
+  
+    if (!organiser) res.status(400).json({ error: "Organiser Doesn't Exist" });
+  
+    const dbPassword = organiser.password;
+    bcrypt.compare(password, dbPassword).then((match) => {
+      if (!match) {
+        res
+          .status(400)
+          .json({ error: "Wrong Username and Password Combination!" });
+      } else {
+        const accessToken = createToken(voter);
+  
+        // cookie will expire in a month.
+        res.cookie("access-token", accessToken, {
+          maxAge: 60 * 60 * 24 * 30 * 1000,
+          httpOnly: true,
+        });
+  
+        res.json("LOGGED IN");
+      }
+    });
+  });
 
 
 export default router;
