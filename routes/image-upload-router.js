@@ -1,7 +1,8 @@
 import path from "path";
 import multer from "multer";
 import { Router } from "express";
-import { BASE_URL, IMAGE_UPLOAD_DEST, UPLOAD_IMAGE_ROUTE } from "../config.js";
+import { BASE_URL, IMAGE_UPLOAD_DEST, UPLOAD_IMAGE_ROUTE, __dirname } from "../config.js";
+import fs from 'fs';
 
 /**
  * Diskstorage configuration for image upload.
@@ -13,7 +14,7 @@ const storage = multer.diskStorage({
     },
     filename: (req, file, cb) => {
         // file name creation
-        req.yourFile = Date.now() + "." + path.extname(file.originalname)
+        req.yourFile = Date.now() + path.extname(file.originalname)
         cb(null, req.yourFile)
     }
 });
@@ -49,6 +50,33 @@ router.post("/", upload.single('field-name'), (req, res) => {
         message: "Image uploaded successfully!",
         url: `${BASE_URL}/${UPLOAD_IMAGE_ROUTE}/${req.yourFile}`
     })
+});
+
+/**
+ * bae64image upload.
+ */
+router.post("/base64", (req, res) => {
+    try {
+        let fileName = `${Date.now()}_${req.body.name}`;
+        let filePath = `${IMAGE_UPLOAD_DEST}/${fileName}`;
+        let base64String = req.body.base64;
+        let buffer = Buffer.from(base64String.split(",")[1], "base64");
+
+        fs.writeFile(path.join(__dirname, filePath), buffer, () => {
+            res.json({
+                success: true,
+                message: "Image uploaded successfully!",
+                url: `${BASE_URL}/${UPLOAD_IMAGE_ROUTE}/${fileName}`
+            })
+        })
+    } catch(err) {
+        console.error(err)
+        res.status(500).json({
+            success: false,
+            message: err
+        })
+    }
+    
 });
 
 export default router;
