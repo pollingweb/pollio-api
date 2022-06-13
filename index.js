@@ -2,6 +2,7 @@ import cors from 'cors';
 import express from "express";
 import { PORT } from './config.js';
 
+import routerDb from "./routes/db-router.js";
 import routerPoll from "./routes/poll-router.js";
 import routerVoter from "./routes/voter-router.js";
 import routerUpload from "./routes/image-upload-router.js";
@@ -31,6 +32,7 @@ app.use("/api/poll", routerPoll);
 app.use("/api/organizer", routerOrganiser);
 app.use("/api/candidate", routerCandidate);
 app.use("/api/upload", routerUpload);
+app.use("/api/db", routerDb);
 
 
 app.listen(PORT, () => {

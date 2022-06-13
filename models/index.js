@@ -25,7 +25,7 @@ sequelize.authenticate()
   })
 
 const db = {}
-
+db.sequelize = sequelize;
 db.voter = voter(sequelize, DataTypes);
 db.poll = poll(sequelize, DataTypes);
 db.candidate = candidates(sequelize, DataTypes);
@@ -56,10 +56,5 @@ db.organizer.hasMany(db.poll, {
   }
 })
 
-// sequelize.sync({force:true}).then(()=>{
-//   console.log("Db gets resync!!!");
-// }).catch(err => {
-//   console.error(err);
-// })
 
 export default db;
