@@ -2,7 +2,7 @@ import db from "../models/index.js";
 import { Router } from "express";
 import { body, validationResult } from 'express-validator';
 import bcrypt from 'bcrypt';
-import { createToken, verifyToken } from "../auth/jwt.js";
+import { createToken } from "../auth/jwt.js";
 
 const router = new Router();
 
@@ -11,7 +11,7 @@ const router = new Router();
  */
 router.post("/",
   body('id').isString(),
-  body('name').isString(),
+  body('name').isString(), 
   body('photoUrl').isString().isURL(),
   body('email').isEmail(),
   (req, res) => {

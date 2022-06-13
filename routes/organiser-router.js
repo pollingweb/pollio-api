@@ -2,7 +2,7 @@ import db from "../models/index.js";
 import { Router } from "express";
 import { body, validationResult } from 'express-validator';
 import bcrypt from 'bcrypt';
-import { createToken, verifyToken } from "../auth/jwt.js";
+import { createToken } from "../auth/jwt.js";
 
 const router = new Router();
 
@@ -64,7 +64,8 @@ router.get("/", (req, res) => {
 /**
  * Find organizer by id.
  */
-router.get("/:id", (req, res) => {
+router.get("/:id",  (req, res) => {
+
     db.organizer.findOne({
         include: [db.poll],
         where: {
@@ -75,6 +76,7 @@ router.get("/:id", (req, res) => {
         .catch(err => res.status(500).json({
             messages: err.errors
         }));
+
 });
 
 
@@ -96,30 +98,30 @@ router.put("/:id", (req, res) => {
 
 router.post("/login", async (req, res) => {
     const { email, password } = req.body;
-  
+
     const organiser = await db.organizer.findOne({ where: { email: email } });
-  
+
     if (!organiser) res.status(400).json({ error: "Organiser Doesn't Exist" });
-  
+
     const dbPassword = organiser.password;
     bcrypt.compare(password, dbPassword).then((match) => {
-      if (!match) {
-        res
-          .status(400)
-          .json({ error: "Wrong Username and Password Combination!" });
-      } else {
-        const accessToken = createToken(voter);
-  
-        // cookie will expire in a month.
-        res.cookie("access-token", accessToken, {
-          maxAge: 60 * 60 * 24 * 30 * 1000,
-          httpOnly: true,
-        });
-  
-        res.json("LOGGED IN");
-      }
+        if (!match) {
+            res
+                .status(400)
+                .json({ error: "Wrong Username and Password Combination!" });
+        } else {
+            const accessToken = createToken(organiser);
+
+            // cookie will expire in a month.
+            res.cookie("access-token", accessToken, {
+                maxAge: 60 * 60 * 24 * 30 * 1000,
+                httpOnly: true,
+            });
+
+            res.json("LOGGED IN");
+        }
     });
-  });
+});
 
 
 export default router;
