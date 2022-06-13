@@ -2,17 +2,17 @@ version: '3.3'
 
 services:
   db:
-    image: mysql:8.0.29
+    image: mysql:latest
     restart: always
     environment:
-      MYSQL_DATABASE: 'pollio'
-      MYSQL_USER: 'root'
-      MYSQL_PASSWORD: 'password'
-      # MYSQL_ROOT_PASSWORD: 'password'
+      MYSQL_ROOT_PASSWORD: pass
+      MYSQL_DATABASE: pollio
+      MYSQL_USER: rohit
+      MYSQL_PASSWORD: password
     ports:
-      - '3306:3306'
+      - 3306:3306
     expose:
-      - '3306'
+      - 3306
 
     volumes:
       - my-app:/var/lib/mysql
@@ -20,12 +20,9 @@ services:
   web:
     build: .
     ports:
-      - "4000:4000"
+      - 4000:4000
     expose:
-      - '4000'
-
-    volumes:
-      - my-app:/var/lib/pollio-api
+      - 4000
 
 volumes:
   my-app:
