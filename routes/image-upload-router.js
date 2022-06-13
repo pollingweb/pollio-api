@@ -40,12 +40,12 @@ const router = new Router();
  */
 router.post("/", upload.single('field-name'), (req, res) => {
     if (!req.isImage) {
-        res.status(404).json({
+        return res.status(404).json({
             success: false,
             message: "Not an image file. Please upload file having extension like [png/jpg/jpeg]"
         })
     }
-    res.json({
+    return res.json({
         success: true,
         message: "Image uploaded successfully!",
         url: `${BASE_URL}/${UPLOAD_IMAGE_ROUTE}/${req.yourFile}`
@@ -63,7 +63,7 @@ router.post("/base64", (req, res) => {
         let buffer = Buffer.from(base64String.split(",")[1], "base64");
 
         fs.writeFile(path.join(__dirname, filePath), buffer, () => {
-            res.json({
+            return res.json({
                 success: true,
                 message: "Image uploaded successfully!",
                 url: `${BASE_URL}/${UPLOAD_IMAGE_ROUTE}/${fileName}`

@@ -2,7 +2,7 @@ import db from "../models/index.js";
 import { Router } from "express";
 import { body, validationResult } from 'express-validator';
 import bcrypt from 'bcrypt';
-import { createToken } from "../auth/jwt.js";
+import { createToken, verifyTokenVoter } from "../auth/jwt.js";
 
 const router = new Router();
 
@@ -11,7 +11,7 @@ const router = new Router();
  */
 router.post("/",
   body('id').isString(),
-  body('name').isString(), 
+  body('name').isString(),
   body('photoUrl').isString().isURL(),
   body('email').isEmail(),
   (req, res) => {
@@ -92,18 +92,20 @@ router.put("/:id",
       }));
   });
 
-
+/**
+ * Voter login.
+ */
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
   const voter = await db.voter.findOne({ where: { email: email } });
 
-  if (!voter) res.status(400).json({ error: "Voter Doesn't Exist" });
+  if (!voter) return res.status(400).json({ error: "Voter Doesn't Exist" });
 
   const dbPassword = voter.password;
   bcrypt.compare(password, dbPassword).then((match) => {
     if (!match) {
-      res
+      return res
         .status(400)
         .json({ error: "Wrong Username and Password Combination!" });
     } else {
@@ -115,9 +117,19 @@ router.post("/login", async (req, res) => {
         httpOnly: true,
       });
 
-      res.json("LOGGED IN");
+      return res.json("LOGGED IN");
     }
   });
 });
+
+
+/**
+ * Accesstoken verify.
+ */
+router.post("/verify", verifyTokenVoter, (req, res) => {
+  return res.json({
+    verified: true
+  })
+})
 
 export default router;

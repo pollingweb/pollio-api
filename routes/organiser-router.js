@@ -2,7 +2,7 @@ import db from "../models/index.js";
 import { Router } from "express";
 import { body, validationResult } from 'express-validator';
 import bcrypt from 'bcrypt';
-import { createToken } from "../auth/jwt.js";
+import { createToken, verifyTokenOrganiser } from "../auth/jwt.js";
 
 const router = new Router();
 
@@ -64,7 +64,7 @@ router.get("/", (req, res) => {
 /**
  * Find organizer by id.
  */
-router.get("/:id",  (req, res) => {
+router.get("/:id", (req, res) => {
 
     db.organizer.findOne({
         include: [db.poll],
@@ -99,18 +99,19 @@ router.put("/:id", (req, res) => {
 router.post("/login", async (req, res) => {
     const { email, password } = req.body;
 
-    const organiser = await db.organizer.findOne({ where: { email: email } });
+    const organizer = await db.organizer.findOne({ where: { email: email } });
 
-    if (!organiser) res.status(400).json({ error: "Organiser Doesn't Exist" });
+    if (organizer === null)
+        return res.status(400).json({ error: "Organiser Doesn't Exist" });
 
-    const dbPassword = organiser.password;
+    const dbPassword = organizer.password;
     bcrypt.compare(password, dbPassword).then((match) => {
         if (!match) {
-            res
+            return res
                 .status(400)
                 .json({ error: "Wrong Username and Password Combination!" });
         } else {
-            const accessToken = createToken(organiser);
+            const accessToken = createToken(organizer);
 
             // cookie will expire in a month.
             res.cookie("access-token", accessToken, {
@@ -118,10 +119,19 @@ router.post("/login", async (req, res) => {
                 httpOnly: true,
             });
 
-            res.json("LOGGED IN");
+            return res.json("LOGGED IN");
         }
     });
 });
+
+/**
+ * Accesstoken verify.
+ */
+router.post("/verify", verifyTokenOrganiser, (req, res) => {
+    res.json({
+        verified: true
+    })
+})
 
 
 export default router;

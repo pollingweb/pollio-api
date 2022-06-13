@@ -17,7 +17,10 @@ export const verifyTokenVoter = (req, res, next) => {
     const accessToken = req.cookies["access-token"];
 
     if (!accessToken)
-        return res.status(400).json({ error: "User not Authenticated!" });
+        return res.status(400).json({
+            verified: false,
+            error: "User not Authenticated!"
+        });
 
     const voter = verify(accessToken, key);
 
@@ -30,8 +33,8 @@ export const verifyTokenVoter = (req, res, next) => {
         if (dbVoter !== null && (voter.password === dbVoter.password)) {
             next();
         } else {
-            res.status(400).json({
-                success: false,
+            return res.status(400).json({
+                verified: false,
                 message: "Not a valid voter"
             })
         }
@@ -43,21 +46,24 @@ export const verifyTokenOrganiser = (req, res, next) => {
     const accessToken = req.cookies["access-token"];
 
     if (!accessToken)
-        return res.status(400).json({ error: "User not Authenticated!" });
+        return res.status(400).json({
+            verified: false,
+            error: "User not Authenticated!"
+        });
 
     const organizer = verify(accessToken, key);
 
     db.organizer.findOne({
         where: {
-            email: voter.email
+            email: organizer.email
         }
     }).then(dbOrg => {
 
         if (dbOrg !== null && (organizer.password === dbOrg.password)) {
             next();
         } else {
-            res.status(400).json({
-                success: false,
+            return res.status(400).json({
+                verified: false,
                 message: "Not a valid organiser."
             })
         }
