@@ -1,6 +1,6 @@
 # Poll.io API support.
 
-Added the below environments to `.env` file
+## Environment varibles
 
 ```bash
 NAME = pollio
@@ -17,6 +17,15 @@ HOST = localhost
 - npm
 - docker
 - docker-compose
+
+## Steps to run this api.
+
+1. Clone this github repo to your local machine.
+2. Go to the project folder.
+3. Add a `.env` file
+4. Add [environment variables](#environment-varibles) into `.env`
+5. Build docker-compose `sudo docker-compose build`
+6. Run containers `sudo docker-compose up` 
 
 ## Voter
 
