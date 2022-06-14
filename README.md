@@ -25,16 +25,29 @@ HOST = localhost
 3. Add a `.env` file
 4. Add [environment variables](#environment-varibles) into `.env`
 5. Build docker-compose `sudo docker-compose build`
-6. Run containers `sudo docker-compose up` 
+6. Run containers `sudo docker-compose up`
 
 ## Voter
 
-| Method | End point      | Header | Body                                     | Response                                                  |
-| ------ | -------------- | ------ | ---------------------------------------- | --------------------------------------------------------- |
-| GET    | /api/voter     | null   | null                                     | [click Here](#response-of-getting-the-list-of-all-voters) |
-| GET    | /api/voter/:id | null   | null                                     | [click Here](#response-of-getting-voters-by-id)           |
-| POST   | /api/voter     | null   | [click Here](#body-for-creating-a-voter) | [click Here](#response-of-voters-creation)                |
-| PUT    | /api/voter/:id | null   | [click Here](#body-for-voter-updation)   | [click Here](#response-of-voter-updation)                 |
+| Name                | Method | End point         | Header | Body                                         | Response                                                  |
+| ------------------- | ------ | ----------------- | ------ | -------------------------------------------- | --------------------------------------------------------- |
+| fetch all           | GET    | /api/voter        | null   | null                                         | [click Here](#response-of-getting-the-list-of-all-voters) |
+| fetch by id         | GET    | /api/voter/:id    | null   | null                                         | [click Here](#response-of-getting-voters-by-id)           |
+| sign up             | POST   | /api/voter        | null   | [click Here](#body-for-creating-a-voter)     | [click Here](#response-of-voters-creation)                |
+| update              | PUT    | /api/voter/:id    | null   | [click Here](#body-for-voter-updation)       | [click Here](#response-of-voter-updation)                 |
+| login               | POST   | /api/voter/login  | null   | [click Here](#login-body-of-voter/organizer) | "LOGGED IN"                                               |
+| verify access token | POST   | /api/voter/verify | null   | null                                         | ```json{ "verified" : true / false }```                   |
+
+### login body of voter/organizer
+
+```JSON
+
+{
+  "email" : "first@gmail.com",
+  "passowrd" : "first-one"
+}
+
+```
 
 ### response of getting the list of all voters
 
@@ -54,6 +67,7 @@ HOST = localhost
 ]
 
 ```
+
 ### response of getting voters by id
 
 ```JSON
@@ -88,6 +102,7 @@ HOST = localhost
 }
 
 ```
+
 ### body for creating a voter
 
 ```JSON
@@ -140,15 +155,14 @@ HOST = localhost
 
 ```
 
-
 ## Candidate
 
-| Method | End point          | Header | Body                                        | Response                                                      |
-| ------ | ------------------ | ------ | ------------------------------------------- | ------------------------------------------------------------- |
-| GET    | /api/candidate     | null   | null                                        | [click Here](#response-of-getting-the-list-of-all-candidates) |
-| GET    | /api/candidate/:id | null   | null                                        | [click Here](#response-of-getting-candidate-by-id)            |
-| POST   | /api/candidate     | null   | [click Here](#body-for-creating-candidates) | [click Here](#response-of-candidate-creation)                 |
-| PUT    | /api/candidate/:id | null   | [click Here](#body-for-candidate-updation)  | [click Here](#response-of-candidate-updation)                 |
+| Name        | Method | End point          | Header | Body                                        | Response                                                      |
+| ----------- | ------ | ------------------ | ------ | ------------------------------------------- | ------------------------------------------------------------- |
+| fetch all   | GET    | /api/candidate     | null   | null                                        | [click Here](#response-of-getting-the-list-of-all-candidates) |
+| fetch by id | GET    | /api/candidate/:id | null   | null                                        | [click Here](#response-of-getting-candidate-by-id)            |
+| add         | POST   | /api/candidate     | null   | [click Here](#body-for-creating-candidates) | [click Here](#response-of-candidate-creation)                 |
+| update      | PUT    | /api/candidate/:id | null   | [click Here](#body-for-candidate-updation)  | [click Here](#response-of-candidate-updation)                 |
 
 ### response of getting the list of all candidates
 
@@ -168,6 +182,7 @@ HOST = localhost
 ]
 
 ```
+
 ### response of getting candidate by id
 
 ```JSON
@@ -195,6 +210,7 @@ HOST = localhost
 }
 
 ```
+
 ### body for creating candidates
 
 ```JSON
@@ -203,7 +219,7 @@ HOST = localhost
     "id": "first",
     "name": "Rohit Singh",
     "PollId": null,             // Optional
-    "imageUrl": "www.hi.com",   
+    "imageUrl": "www.hi.com",
     "voteCount": 0,             // Optional
     "description": null         // optional
 }
@@ -248,12 +264,14 @@ HOST = localhost
 
 ## Organiser
 
-| Method | End point          | Header | Body                                        | Response                                                      |
-| ------ | ------------------ | ------ | ------------------------------------------- | ------------------------------------------------------------- |
-| GET    | /api/organizer     | null   | null                                        | [click Here](#response-of-getting-the-list-of-all-organisers) |
-| GET    | /api/organizer/:id | null   | null                                        | [click Here](#response-of-getting-organiser-by-id)            |
-| POST   | /api/organizer     | null   | [click Here](#body-for-creating-organiser)  | [click Here](#response-of-organisers-creation)                |
-| PUT    | /api/organizer/:id | null   | [click Here](#body-for-organisers-updation) | [click Here](#response-of-organisers-updation)                |
+| Name                | Method | End point             | Header | Body                                         | Response                                                      |
+| ------------------- | ------ | --------------------- | ------ | -------------------------------------------- | ------------------------------------------------------------- |
+| fetch all           | GET    | /api/organizer        | null   | null                                         | [click Here](#response-of-getting-the-list-of-all-organisers) |
+| fetch by id         | GET    | /api/organizer/:id    | null   | null                                         | [click Here](#response-of-getting-organiser-by-id)            |
+| sign up             | POST   | /api/organizer        | null   | [click Here](#body-for-creating-organiser)   | [click Here](#response-of-organisers-creation)                |
+| update              | PUT    | /api/organizer/:id    | null   | [click Here](#body-for-organisers-updation)  | [click Here](#response-of-organisers-updation)                |
+| login               | POST   | /api/organizer/login  | null   | [click Here](#login-body-of-voter/organizer) | "LOGGED IN"                                                   |
+| verify access-token | POST   | /api/organizer/verify | null   | null                                         | ```json{ "verified" : true / false }```                       |
 
 ### response of getting the list of all organisers
 
@@ -272,6 +290,7 @@ HOST = localhost
   }
 ]
 ```
+
 ### response of getting organiser by id
 
 ```JSON
@@ -301,6 +320,7 @@ HOST = localhost
 }
 
 ```
+
 ### body for creating organiser
 
 ```JSON
@@ -355,13 +375,12 @@ HOST = localhost
 
 ## Poll
 
-| Method | End point     | Header | Body                                  | Response                                                 |
-| ------ | ------------- | ------ | ------------------------------------- | -------------------------------------------------------- |
-| GET    | /api/poll     | null   | null                                  | [click Here](#response-of-getting-the-list-of-all-polls) |
-| GET    | /api/poll/:id | null   | null                                  | [click Here](#response-of-getting-poll-by-id)            |
-| POST   | /api/poll     | null   | [click Here](#body-for-creating-poll) | [click Here](#response-of-poll-creation)                 |
-| PUT    | /api/poll/:id | null   | [click Here](#body-for-poll-updation) | [click Here](#response-of-poll-updation)                 |
-
+| Name        | Method | End point     | Header | Body                                  | Response                                                 |
+| ----------- | ------ | ------------- | ------ | ------------------------------------- | -------------------------------------------------------- |
+| fetch all   | GET    | /api/poll     | null   | null                                  | [click Here](#response-of-getting-the-list-of-all-polls) |
+| fetch by id | GET    | /api/poll/:id | null   | null                                  | [click Here](#response-of-getting-poll-by-id)            |
+| create      | POST   | /api/poll     | null   | [click Here](#body-for-creating-poll) | [click Here](#response-of-poll-creation)                 |
+| update      | PUT    | /api/poll/:id | null   | [click Here](#body-for-poll-updation) | [click Here](#response-of-poll-updation)                 |
 
 ### response of getting the list of all polls
 
@@ -382,6 +401,7 @@ HOST = localhost
 ]
 
 ```
+
 ### response of getting poll by id
 
 ```JSON
@@ -437,6 +457,7 @@ HOST = localhost
 }
 
 ```
+
 ### body for creating poll
 
 ```JSON
@@ -492,10 +513,10 @@ HOST = localhost
 
 ## Image upload
 
-
-| Method | End point   | Header | Body                                 | Response                                |
-| ------ | ----------- | ------ | ------------------------------------ | --------------------------------------- |
-| POST   | /api/upload | null   | [click Here](#body-for-image-upload) | [click Here](#response-of-image-upload) |
+| Name                 | Method | End point          | Header | Body                                        | Response                                |
+| -------------------- | ------ | ------------------ | ------ | ------------------------------------------- | --------------------------------------- |
+| upload image as file | POST   | /api/upload        | null   | [click Here](#body-for-image-upload)        | [click Here](#response-of-image-upload) |
+| upload base64 image  | POST   | /api/upload/base64 | null   | [click Here](#body-for-base64-image-upload) | [click Here](#response-of-image-upload) |
 
 ### body for image upload
 
@@ -504,6 +525,17 @@ HOST = localhost
         <input type="file" name="field-name"/>
         <input type="submit"/>
     </form>
+```
+
+### body for base64 image upload
+
+```json
+
+{
+  "name" : "some.png",
+  "base64" : "base64 string"
+
+}
 ```
 
 ### response of image upload
@@ -517,3 +549,5 @@ HOST = localhost
 }
 
 ```
+
+
