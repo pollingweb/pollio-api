@@ -36,7 +36,7 @@ HOST = localhost
 | sign up             | POST   | /api/voter        | null   | [click Here](#body-for-creating-a-voter)     | [click Here](#response-of-voters-creation)                |
 | update              | PUT    | /api/voter/:id    | null   | [click Here](#body-for-voter-updation)       | [click Here](#response-of-voter-updation)                 |
 | login               | POST   | /api/voter/login  | null   | [click Here](#login-body-of-voter/organizer) | "LOGGED IN"                                               |
-| verify access token | POST   | /api/voter/verify | null   | null                                         | ```json{ "verified" : true / false }```                   |
+| verify access token | POST   | /api/voter/verify | null   | null                                         | `json{ "verified" : true / false }`                       |
 
 ### login body of voter/organizer
 
@@ -271,7 +271,7 @@ HOST = localhost
 | sign up             | POST   | /api/organizer        | null   | [click Here](#body-for-creating-organiser)   | [click Here](#response-of-organisers-creation)                |
 | update              | PUT    | /api/organizer/:id    | null   | [click Here](#body-for-organisers-updation)  | [click Here](#response-of-organisers-updation)                |
 | login               | POST   | /api/organizer/login  | null   | [click Here](#login-body-of-voter/organizer) | "LOGGED IN"                                                   |
-| verify access-token | POST   | /api/organizer/verify | null   | null                                         | ```json{ "verified" : true / false }```                       |
+| verify access-token | POST   | /api/organizer/verify | null   | null                                         | `{ "verified" : true / false }`                               |
 
 ### response of getting the list of all organisers
 
