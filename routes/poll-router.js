@@ -23,7 +23,27 @@ router.post("/",
         }
 
         db.poll.create(req.body)
-            .then((poll) => res.json(poll))
+            .then((poll) => {
+                if (poll.pollType === 'Public') {
+                    db.voter.findAll().then(voters => {
+                        if (voters.length > 0) {
+                            Promise.all(
+                                voters.map(voter => {
+                                    db.poll_voter.create({
+                                        pollId: poll.id,
+                                        voterId: voter.id
+                                    })
+                                }))
+                                .then(() => res.json(poll))
+                                .catch(err => res.json({
+                                    success: true,
+                                    messages: "error in registring voters"
+                                }))
+                        }
+                    });
+                }
+
+            })
             .catch(err => res.status(500).json({
                 success: false,
                 messages: err.errors || "Poll not created, insufficient data!"
