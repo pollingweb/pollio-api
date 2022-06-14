@@ -1,5 +1,22 @@
 # Poll.io API support.
 
+Added the below environments to `.env` file
+
+```bash
+NAME = pollio
+USER_NAME = root
+PASSWORD = password
+HOST = localhost
+```
+
+## Dependencies :
+
+- `.env` into root directory
+- ubuntu
+- node > 16
+- npm
+- docker
+- docker-compose
 
 ## Voter
 
