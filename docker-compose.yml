@@ -1,28 +1,50 @@
-version: '3.3'
+version: '3'
 
 services:
-  db:
-    image: mysql:latest
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: pass
-      MYSQL_DATABASE: pollio
-      MYSQL_USER: rohit
-      MYSQL_PASSWORD: password
-    ports:
-      - 3306:3306
-    expose:
-      - 3306
-
-    volumes:
-      - my-app:/var/lib/mysql
-
   web:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: nodejs
+    container_name: pollio
+    restart: unless-stopped
+    depends_on:
+      - db
+    env_file: .env
+    environment:
+      - NAME=$NAME
+      - USER_NAME=$USER_NAME
+      - PASSWORD=$PASSWORD
+      - HOST=db
     ports:
-      - 4000:4000
-    expose:
-      - 4000
+      - "4000:4000"
+    volumes:
+      - .:/home/node/app
+      - node_modules:/home/node/app/node_modules
+    networks:
+      - app-network
+
+  db:
+    image: mysql
+    container_name: db
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      - MYSQL_DATABASE=$NAME
+      - MYSQL_USER=$USER_NAME
+      - MYSQL_PASSWORD=$PASSWORD
+      - MYSQL_ROOT_PASSWORD=$PASSWORD
+    ports:
+      - "3306:3306"
+    volumes:     
+      - dbdata:/data/db
+    networks:
+      - app-network  
+
+networks:
+  app-network:
+    driver: bridge
 
 volumes:
-  my-app:
+  dbdata:
+  node_modules:  
