@@ -52,11 +52,13 @@ router.post("/",
                   messages: "error in registring to polls"
                 }))
             }
+
+            return res.json(voter);
           })
         })
         .catch(err => res.status(500).json({
           success: false,
-          messages: err.errors || "voter not created, insufficient data."
+          messages: err || "voter not created, insufficient data."
         }));
     })
 
@@ -156,6 +158,26 @@ router.post("/:id", (req, res) => {
     }));
 });
 
+/**
+ * Mark voted.
+ */
+router.put("/:id/poll/:pollId", (req, res) => {
+  db.poll_voter.update(
+    {
+      isVoted: true
+    },
+    {
+      where: {
+        pollId: req.params.id,
+        voterId: req.params.pollId
+      }
+    })
+    .then(() => res.json({ success: true, message: "You have voted successfully!" }))
+    .catch(err => res.status(500).json({
+      success: false,
+      messages: err
+    }));
+});
 
 /**
  * Accesstoken verify.

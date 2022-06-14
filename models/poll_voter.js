@@ -6,7 +6,11 @@ export default (sequelize, DataTypes) => {
             primaryKey: true
         },
         pollId: DataTypes.STRING,
-        voterId: DataTypes.STRING
+        voterId: DataTypes.STRING,
+        isVoted: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
+        }
     }, { timestamps: false });
 
     return Poll_voter;

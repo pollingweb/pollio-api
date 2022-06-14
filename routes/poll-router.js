@@ -118,5 +118,25 @@ router.post("/:id", (req, res) => {
         }));
 });
 
+/**
+ * Validate vote.
+ */
+router.get("/:id/voter/:voterId/verify", (req, res) => {
+    db.poll_voter.findOne({
+        where: {
+            pollId: req.params.id,
+            voterId: req.params.voterId
+        }})
+        .then((result) => {
+            res.json({
+                isVoted : (result !== null) ? result.isVoted : false 
+            })
+        })
+        .catch(err => res.status(500).json({
+            success: false,
+            messages: err
+        }));
+});
+
 
 export default router;
