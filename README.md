@@ -36,7 +36,7 @@ HOST = localhost
 | sign up             | POST   | /api/voter        | null   | [click Here](#body-for-creating-a-voter)     | [click Here](#response-of-voters-creation)                |
 | update              | PUT    | /api/voter/:id    | null   | [click Here](#body-for-voter-updation)       | [click Here](#response-of-voter-updation)                 |
 | login               | POST   | /api/voter/login  | null   | [click Here](#login-body-of-voter/organizer) | "LOGGED IN"                                               |
-| verify access token | POST   | /api/voter/verify | null   | null                                         | `json{ "verified" : true / false }`                       |
+| verify access token | POST   | /api/voter/verify | null   | null                                         | `{ "verified" : true / false }`                       |
 
 ### login body of voter/organizer
 
