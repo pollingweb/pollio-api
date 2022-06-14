@@ -6,7 +6,7 @@ export const __dirname = dirname(__filename);
 
 // Db configurations
 export const DB_NAME = "pollio";
-export const DB_USER_NAME = "rohit";
+export const DB_USER_NAME = "root";
 export const DB_PASSWORD = "password";
 export const DB_HOST = "localhost";
 export const DB_DIALECT = "mysql";

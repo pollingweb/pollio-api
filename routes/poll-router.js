@@ -49,7 +49,10 @@ router.get("/", (req, res) => {
  */
 router.get("/:id", (req, res) => {
     db.poll.findOne({
-        include: [db.organizer, db.candidate, db.voter],
+        include: [db.organizer, db.candidate, {
+            model: db.voter,
+            attributes: { exclude: ['password'] }
+        }],
         where: {
             id: req.params.id
         }
@@ -71,6 +74,23 @@ router.put("/:id", (req, res) => {
     })
         .then(() => res.json({
             message: "poll updated successfully!",
+        }))
+        .catch(err => res.status(500).json({
+            success: false,
+            messages: err
+        }));
+});
+
+/**
+ * Add voter.
+ */
+router.post("/:id", (req, res) => {
+    db.poll_voter.create({
+        pollId: req.params.id,
+        voterId: req.body.voterId
+    })
+        .then(() => res.json({
+            message: "voter added successfully!",
         }))
         .catch(err => res.status(500).json({
             success: false,

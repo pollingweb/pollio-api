@@ -1,5 +1,5 @@
 export default (sequelize, DataTypes) => {
-  const Poll = sequelize.define("Poll", {
+  const Poll = sequelize.define("poll", {
     id: {
       type: DataTypes.STRING,
       allowNull: false,

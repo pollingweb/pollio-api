@@ -1,5 +1,5 @@
 export default (sequelize, DataTypes) => {
-  const Candidate = sequelize.define("Candidate", {
+  const Candidate = sequelize.define("candidate", {
     id: {
       type: DataTypes.STRING,
       allowNull: false,

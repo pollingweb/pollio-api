@@ -63,12 +63,12 @@ router.get("/",
  * Find voter by id.
  */
 router.get("/:id", (req, res) => {
-  db.voter.findOne(
-    {
-      where: {
-        id: req.params.id
-      }
-    })
+  db.voter.findOne({
+    include: [db.poll],
+    where: {
+      id: req.params.id
+    }
+  })
     .then(voter => res.json(voter))
     .catch(err => res.status(500).json({
       messages: err.errors
@@ -120,6 +120,23 @@ router.post("/login", async (req, res) => {
       return res.json("LOGGED IN");
     }
   });
+});
+
+/**
+ * Add poll.
+ */
+router.post("/:id", (req, res) => {
+  db.poll_voter.create({
+    voterId: req.params.id,
+    pollId: req.body.pollId
+  })
+    .then(() => res.json({
+      message: "poll added successfully!",
+    }))
+    .catch(err => res.status(500).json({
+      success: false,
+      messages: err
+    }));
 });
 
 

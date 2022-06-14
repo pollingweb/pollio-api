@@ -1,5 +1,5 @@
 export default (sequelize, DataTypes) => {
-  const Organizer = sequelize.define("Organiser", {
+  const Organizer = sequelize.define("organizer", {
     id: {
       type: DataTypes.STRING,
       allowNull: false,
