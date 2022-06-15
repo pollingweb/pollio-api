@@ -177,7 +177,8 @@ SERVER_PORT = 4000
       "poll_voter": {
         "id": 1,
         "pollId": "first-poll",
-        "voterId": "first-voter"
+        "voterId": "first-voter",
+        "isVoted": false
       }
     }
   ]
@@ -531,7 +532,8 @@ SERVER_PORT = 4000
       "poll_voter": {
         "id": 1,
         "pollId": "first-poll",
-        "voterId": "first-voter"
+        "voterId": "first-voter",
+        "isVoted": false
       }
     }
   ]
