@@ -5,8 +5,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: nodejs
-    container_name: pollio
+    image: node:lts-alpine
+    container_name: pollioweb-api
     restart: unless-stopped
     depends_on:
       - db
@@ -17,7 +17,7 @@ services:
       - PASSWORD=$PASSWORD
       - HOST=db
     ports:
-      - "4000:4000"
+      - "$SERVER_PORT:$SERVER_PORT"
     volumes:
       - .:/home/node/app
       - node_modules:/home/node/app/node_modules
@@ -26,7 +26,7 @@ services:
 
   db:
     image: mysql
-    container_name: db
+    container_name: db-mysql
     restart: unless-stopped
     env_file: .env
     environment:
@@ -36,10 +36,10 @@ services:
       - MYSQL_ROOT_PASSWORD=$PASSWORD
     ports:
       - "3306:3306"
-    volumes:     
+    volumes:
       - dbdata:/data/db
     networks:
-      - app-network  
+      - app-network
 
 networks:
   app-network:
@@ -47,4 +47,4 @@ networks:
 
 volumes:
   dbdata:
-  node_modules:  
+  node_modules:

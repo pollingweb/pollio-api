@@ -7,6 +7,7 @@ NAME = pollio
 USER_NAME = root
 PASSWORD = password
 HOST = localhost
+SERVER_PORT = 4000
 ```
 
 ## Dependencies :
